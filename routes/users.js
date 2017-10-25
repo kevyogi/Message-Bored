@@ -5,6 +5,4 @@ router.get('/', (req, res) => {
   res.json('this is the users page');
 });
 
-
-
 module.exports = router;
