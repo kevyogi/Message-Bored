@@ -5,8 +5,12 @@ const Users = db.user;
 const Messages = db.message;
 
 router.post('/', (req, res) => {
-  return Users.create({
+  console.log(req.body.name)
+  Users.create({
     name: req.body.name
+  })
+  .then((newUser) => {
+    res.json(newUser);
   });
 });
 

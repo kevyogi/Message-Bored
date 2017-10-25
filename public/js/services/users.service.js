@@ -3,7 +3,7 @@ angular.module('myApp')
   var url = '/api/users';
   var self = this;
 
-  this.users = [];
+  // this.users = [];
 
   $http.get(url)
   .then(function(users){
@@ -27,7 +27,9 @@ angular.module('myApp')
     self.users.push(user);
 
     $http.post(url, user)
+    // console.log(user)
     .then(function(response){
+      console.log(response);
       console.log('user created on backend');
     });
   }

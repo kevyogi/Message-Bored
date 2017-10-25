@@ -9,15 +9,9 @@ angular.module('myApp')
     name: ''
   };
 
-  // UserService.getUsers()
-  // .then(function(users){
-  //   $scope.users = users;
-  // });
-
-  // UserService.getUsers()
-  // .then(function(users){
-  //   $scope.users = users;
-  // });
+  // $scope.getUser = function(e){
+  //   UserService.getUser()
+  // }
 
   $scope.getUsers = function(e){
     $scope.users = UserService.getUsers();
