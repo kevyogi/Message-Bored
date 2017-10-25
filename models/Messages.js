@@ -7,7 +7,6 @@ module.exports = function(sequelize, DataTypes){
     indexes: [
       {
         name: 'Messages_pkey',
-        method: 'BTREE',
         unique: true,
         fields: ['id']
       }
@@ -15,8 +14,20 @@ module.exports = function(sequelize, DataTypes){
   });
 
   Message.associate = function(models){
-    Message.belongsTo(models.user, {foreignKey: 'author_id'});
-    Message.belongsTo(models.topic, {foreignKey: 'topic_id'});
+    Message.belongsTo(models.user, {
+      foreignKey: {
+        name: 'author_id',
+        allowNull: false
+      },
+      onDelete: 'NO ACTION'
+    });
+    Message.belongsTo(models.topic, {
+      foreignKey: {
+        name: 'topic_id',
+        allowNull: false
+      },
+      onDelete: 'NO ACTION'
+    });
   };
   return Message;
 };

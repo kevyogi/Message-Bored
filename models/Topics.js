@@ -7,13 +7,11 @@ module.exports = function(sequelize, DataTypes){
     indexes: [
       {
         name: 'Topics_pkey',
-        method: 'BTREE',
         unique: true,
         fields: ['id']
       },
       {
         name: 'Topics_name_key',
-        method: 'BTREE',
         unique: true,
         fields: ['name']
       }
@@ -21,7 +19,13 @@ module.exports = function(sequelize, DataTypes){
   });
 
   Topic.associate = function(models){
-    Topic.belongsTo(models.user, {foreignKey: 'author_id'});
+    Topic.belongsTo(models.user, {
+      foreignKey: {
+        name: 'author_id',
+        allowNull: false
+      },
+      onDelete: 'NO ACTION'
+    });
   };
   return Topic;
 };
