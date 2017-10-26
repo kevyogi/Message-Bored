@@ -39,13 +39,11 @@ angular.module('myApp')
     var user = {
       name: givenUser.name
     };
-    self.users.push(user);
 
-    $http.post(newUserUrl, user)
+    return $http.post(newUserUrl, user)
     .then(function(response){
-      // console.log(response);
-      // console.log($location);
-      console.log('user created on backend');
+      self.users.push(response.data);
+      return response.data;
     });
   }
 
