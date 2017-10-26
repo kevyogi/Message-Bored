@@ -1,12 +1,7 @@
-<div>
+<div>Users:
   <ul>
     <li ng-repeat="user in UserService.users">
-      <h4>{{ user.name }}</h4>
+      <a ng-href="/users/{{user.id}}">{{ user.name }}</a>
     </li>
   </ul>
 </div>
-
-<form>
-  <input type="text" ng-model="newUser.name" placeholder="Name">
-  <button ng-click="addUser()">New User</button>
-</form>

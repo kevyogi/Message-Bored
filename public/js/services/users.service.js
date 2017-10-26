@@ -1,22 +1,37 @@
 angular.module('myApp')
-.service('UserService', ['$http', function($http){
-  var url = '/api/users';
+.service('UserService', ['$http', '$location', '$window', function($http, $location, $window){
+  var usersUrl = '/api/users/';
+  var newUserUrl = '/api/users/register';
   var self = this;
 
-  // this.users = [];
+  this.users = [];
 
-  $http.get(url)
+  $http.get(usersUrl)
   .then(function(users){
     self.users = users.data;
   });
 
-  this.getUsers = function(){
-    return self.users;
+  this.getUser = function(id){
+    if(!id){ return; }
+
+    return $http.get(usersUrl+id)
+    .then(function(userInfo){
+      console.log(userInfo.data);
+      return userInfo.data;
+    });
   }
 
-  this.getUser = function(index){
-    return users[index];
-  }
+  // this.getUsers = function(){
+  //   return self.users;
+  // }
+
+  // this.login = function(user){
+  //   $http.post('/api/users/login')
+  //   .then(function(data){
+  //     $window.localStorage.setItem('user_id', data);
+  //     console.log(data);
+  //   });
+  // }
 
   this.addUser = function(givenUser){
     if(!givenUser){ return; }
@@ -26,10 +41,10 @@ angular.module('myApp')
     };
     self.users.push(user);
 
-    $http.post(url, user)
-    // console.log(user)
+    $http.post(newUserUrl, user)
     .then(function(response){
-      console.log(response);
+      // console.log(response);
+      // console.log($location);
       console.log('user created on backend');
     });
   }

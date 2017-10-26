@@ -19,7 +19,9 @@
   "homepage": "https://github.com/kevyogi/Message-Bored#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect-redis": "^3.3.2",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.17.2",

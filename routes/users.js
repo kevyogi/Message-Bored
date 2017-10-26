@@ -4,13 +4,25 @@ const db = require('../models');
 const Users = db.user;
 const Messages = db.message;
 
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
   console.log(req.body.name)
   Users.create({
     name: req.body.name
   })
   .then((newUser) => {
     res.json(newUser);
+  });
+});
+
+router.post('/login', (req, res) => {
+  console.log(req.body);
+  Users.findOne({
+    where: {name: req.body.name}
+  })
+  .then((user) => {
+    if(user){
+    res.json(user.id);
+    }
   });
 });
 
@@ -32,12 +44,12 @@ router.get('/:id', (req, res) => {
         where: {
           author_id: userID
         },
-        raw: true,
-        order: 'createdAt DESC'
+        raw: true
       })
       .then((userMessages) => {
         let userInfo = {
-          user: user,
+          user: user.name,
+          id: user.id,
           joinDate: user.createdAt,
           messages: userMessages
         }
