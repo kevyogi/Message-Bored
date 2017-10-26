@@ -8,9 +8,13 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/users.html',
     controller: 'UsersController'
   })
-  .when('/users/register', {
+  .when('/register', {
     templateUrl: '/views/newUser.html',
     controller: 'newUserController'
+  })
+  .when('/login', {
+    templateUrl: '/views/login.html',
+    controller: 'loginController'
   })
   .when('/users/:id', {
     templateUrl: '/views/singleUser.html',

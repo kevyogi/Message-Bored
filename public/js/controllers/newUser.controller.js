@@ -5,6 +5,7 @@ angular.module('myApp')
     UserService.addUser($scope.newUser);
 
     $scope.newUser.name = '';
+    $scope.newUser.password = '';
   }
 
 }])

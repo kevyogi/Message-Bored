@@ -4,16 +4,6 @@ const db = require('../models');
 const Users = db.user;
 const Messages = db.message;
 
-router.post('/register', (req, res) => {
-  console.log(req.body.name)
-  Users.create({
-    name: req.body.name
-  })
-  .then((newUser) => {
-    res.json(newUser);
-  });
-});
-
 router.post('/login', (req, res) => {
   console.log(req.body);
   Users.findOne({

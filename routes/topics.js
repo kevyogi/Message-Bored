@@ -14,7 +14,6 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   return Topics.findAll({raw:true})
   .then((topics) => {
-    // res.json(topics);
     if(topics){
       return Users.findAll({raw:true})
       .then((users) => {
@@ -23,6 +22,24 @@ router.get('/', (req, res) => {
           users: users
         }
         return res.json(data);
+      });
+    }
+  });
+});
+
+router.put('/:id', (req, res) => {
+  const topicID = req.params.id;
+  return Topics.findOne({
+    where: {id: topicID}
+  })
+  .then((topic) => {
+    if(topic){
+      return Topics.update({
+        name: req.body.name
+      },{
+        where: {
+          id: topicID
+        }
       });
     }
   });

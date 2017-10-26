@@ -1,7 +1,7 @@
 angular.module('myApp')
-.service('UserService', ['$http', '$location', '$window', function($http, $location, $window){
+.service('UserService', ['$http', '$location', function($http, $location){
   var usersUrl = '/api/users/';
-  var newUserUrl = '/api/users/register';
+  var newUserUrl = '/api/register';
   var self = this;
 
   this.users = [];
@@ -21,23 +21,12 @@ angular.module('myApp')
     });
   }
 
-  // this.getUsers = function(){
-  //   return self.users;
-  // }
-
-  // this.login = function(user){
-  //   $http.post('/api/users/login')
-  //   .then(function(data){
-  //     $window.localStorage.setItem('user_id', data);
-  //     console.log(data);
-  //   });
-  // }
-
   this.addUser = function(givenUser){
     if(!givenUser){ return; }
 
     var user = {
-      name: givenUser.name
+      name: givenUser.name,
+      password: givenUser.password
     };
 
     return $http.post(newUserUrl, user)
@@ -45,6 +34,19 @@ angular.module('myApp')
       self.users.push(response.data);
       return response.data;
     });
+  }
+
+  this.login = function(theUser){
+    var user = {
+      name: theUser.name,
+      password: theUser.password
+    }
+
+    return $http.post('/api/login', user)
+    .then(function(response){
+      $location.path('/users');
+      return response.data;
+    })
   }
 
 }]);
