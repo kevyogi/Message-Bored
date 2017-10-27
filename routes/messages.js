@@ -5,10 +5,22 @@ const Topics = db.topic;
 const Users = db.user;
 const Messages = db.message;
 
-// router.post('/', (req, res) => {
-//   return Messages.create({
+router.get('/', (req, res) => {
+  Messages.findAll({raw: true})
+  .then((messages) => {
+    console.log(messages);
+    res.json(messages);
+  });
+});
 
-//   })
-// })
+router.get('/latest', (req, res) => {
+  Messages.findAll(
+    {limit: 10, order: [['createdAt', 'DESC']],
+    include: [{model: Topics}, {model: Users}]})
+  .then((messages) => {
+    console.log(messages);
+    res.json(messages);
+  });
+});
 
 module.exports = router;

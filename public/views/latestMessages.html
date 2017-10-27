@@ -1,0 +1,11 @@
+<div>
+  <ul>
+    <li ng-repeat="message in messages">
+      <ul>
+      <div>Message: {{ message.body }}</div>
+      <div>Posted in: {{ message.topic.name }}</div>
+      <div>By: {{ message.user.name }}</div>
+      </ul>
+    </li>
+  </ul>
+</div>

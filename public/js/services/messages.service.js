@@ -1,6 +1,8 @@
 angular.module('myApp')
 .service('MessageService', ['$http', function($http){
 
+  var self = this;
+
   this.messages = [];
 
   this.addMessage = function(message, id){
@@ -13,6 +15,14 @@ angular.module('myApp')
     .then(function(response){
       self.messages.push(response.data);
       console.log('message response:', response.data);
+      return response.data;
+    });
+  }
+
+  this.getMessages = function(){
+    return $http.get('/api/messages/latest')
+    .then(function(response){
+      console.log('latest:', response.data);
       return response.data;
     });
   }

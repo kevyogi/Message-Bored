@@ -6,7 +6,7 @@
 <div>Topics:
   <ul>
     <li ng-repeat="topic in TopicService.topics">
-      <a ng-href="/topics/{{topic.id}}">{{ topic.name }}</a>
+      <a ng-href="/topics/{{topic.id}}/messages">{{ topic.name }}</a>
       <p>Posted by: {{ topic.user.name }}</p>
     </li>
   </ul>

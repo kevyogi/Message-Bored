@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(session({
-  //store: new redis(),
+  store: new redis(),
   secret: 'strejk',
   resave: false,
   saveUninitialized: false

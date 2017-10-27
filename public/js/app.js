@@ -24,9 +24,13 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/newTopic.html',
     controller: 'TopicsController'
   })
-  .when('/topics/:id', {
+  .when('/topics/:id/messages', {
     templateUrl: '/views/singleTopic.html',
     controller: 'SingleTopicController'
+  })
+  .when('/messages/latest', {
+    templateUrl: '/views/latestMessages.html',
+    controller: 'MessagesController'
   })
 
   $locationProvider.html5Mode(true);

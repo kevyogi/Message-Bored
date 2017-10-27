@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id/messages', (req, res) => {
   return Messages.findAll({include:[{model: Users}],
    where: {topic_id: req.params.id}}, {raw:true})
   .then((data) => {
