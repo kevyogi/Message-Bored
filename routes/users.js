@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../models');
 const Users = db.user;
 const Messages = db.message;
+const Topics = db.topic;
 
 router.post('/login', (req, res) => {
   console.log(req.body);
@@ -30,7 +31,7 @@ router.get('/:id', (req, res) => {
     if(!user){
       return res.redirect('/');
     }else{
-      return Messages.findAll({
+      return Messages.findAll({include:[{model: Topics}],
         where: {
           author_id: userID
         },

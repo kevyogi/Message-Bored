@@ -16,7 +16,7 @@ angular.module('myApp')
 
     return $http.get(usersUrl+id)
     .then(function(userInfo){
-      console.log(userInfo.data);
+      console.log('userinfo:', userInfo.data);
       return userInfo.data;
     });
   }

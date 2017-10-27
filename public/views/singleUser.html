@@ -3,10 +3,13 @@
     <li>
       <h4>User: {{ user.user }}</h4>
       <li>Join Date: {{ user.joinDate }}</li>
-      <li ng-repeat="message in user.messages">
         Messages:
-        <p>{{ message.body }}</p>
-      </li>
+      <ul ng-repeat="message in user.messages">
+        <li>
+          <p>Message: {{ message.body }}</p>
+          <div>Topic: {{ message['topic.name'] }}</div>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>
