@@ -24,6 +24,10 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/newTopic.html',
     controller: 'TopicsController'
   })
+  .when('/topics/:id', {
+    templateUrl: '/views/singleTopic.html',
+    controller: 'SingleTopicController'
+  })
 
   $locationProvider.html5Mode(true);
 }]);

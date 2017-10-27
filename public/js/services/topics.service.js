@@ -15,7 +15,7 @@ angular.module('myApp')
     .then(function(response){
       self.topics.push(response.data)
       console.log('service response:', response.data);
-      return response.data[(response.data.length-1)];
+      return response.data;
     });
   }
 
@@ -27,5 +27,21 @@ angular.module('myApp')
     self.topics = topics.data;
     return topics.data;
   });
+
+  this.getTopic = function(id){
+    return $http.get(`/api/topics/${id}`)
+    .then(function(topicInfo){
+      console.log(topicInfo);
+      return topicInfo;
+    });
+  }
+
+  // this.editTopic = function(id){
+  //   return $http.put(`/api/topics/${id}`)
+  //   .then(function(topic){
+  //     console.log(topic);
+  //     return topic;
+  //   });
+  // }
 
 }])
