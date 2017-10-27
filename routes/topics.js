@@ -18,20 +18,27 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  return Topics.findAll({raw:true})
+  return Topics.findAll({include: [{model: Users}]}, {raw:true})
   .then((topics) => {
-    if(topics){
-      return Users.findAll({raw:true})
-      .then((users) => {
-        let data = {
-          messages: messages,
-          users: users
-        }
-        return res.json(data);
-      });
-    }
+    return res.json(topics);
   });
 });
+
+// router.get('/', (req, res) => {
+//   return Topics.findAll({include: [{model: Users}]}, {raw:true})
+//   .then((topics) => {
+//     if(topics){
+//       return Users.findAll({raw:true})
+//       .then((users) => {
+//         let data = {
+//           topics: topics,
+//           users: users
+//         }
+//         return res.json(data);
+//       });
+//     }
+//   });
+// });
 
 router.put('/:id', (req, res) => {
   const topicID = req.params.id;

@@ -2,3 +2,12 @@
   <input type="text" ng-model="newTopic.name" placeholder="Topic Name">
 </form>
 <button ng-click="addTopic()">Create New Topic</button>
+
+<div>Topics:
+  <ul>
+    <li ng-repeat="topic in TopicService.topics">
+      <a ng-href="/topics/{{topic.id}}">{{ topic.name }}</a>
+      <p>Posted by: {{ topic.user.name }}</p>
+    </li>
+  </ul>
+</div>

@@ -1,5 +1,6 @@
 angular.module('myApp')
 .service('TopicService', ['$http', function($http){
+  var self = this;
 
   this.topics = [];
 
@@ -12,8 +13,16 @@ angular.module('myApp')
 
     return $http.post('/api/topics', topic)
     .then(function(response){
-      console.log('service response:', response);
+      self.topics.push(response.data)
+      console.log('service response:', response.data);
       return response.data;
     });
   }
+
+  $http.get('/api/topics')
+  .then(function(topics){
+    console.log(topics.data);
+    self.topics = topics.data;
+  });
+
 }])
