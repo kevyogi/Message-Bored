@@ -5,9 +5,15 @@ const Topics = db.topic;
 const Users = db.user;
 
 router.post('/', (req, res) => {
-  Topics.create({
+  console.log('backend');
+  console.log('REQBODY:', req);
+  console.log('USER:', req.user);
+  return Topics.create({
     name: req.body.name,
-    created_by: req.user.id
+    author_id: req.user.id
+  })
+  .then((topic) => {
+    return res.json(topic);
   });
 });
 
@@ -44,5 +50,11 @@ router.put('/:id', (req, res) => {
     }
   });
 });
+
+function isAuthenticated(req, res, next){
+  if(req.isAuthenticated()) {next();}
+  else{console.log('mistake');
+  }
+}
 
 module.exports = router;

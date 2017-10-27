@@ -16,18 +16,19 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use('/api', routes);
 app.use(session({
-  store: new redis(),
+  //store: new redis(),
   secret: 'strejk',
   resave: false,
   saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api', routes);
 
 passport.serializeUser((user, done) => {
   console.log('serializing');
+  console.log(user);
   return done(null, {
     id: user.id,
     name: user.name
@@ -58,7 +59,6 @@ passport.use(new LocalStrategy({usernameField: 'name'}, function (name, password
           if(res){
             var foundUser = user.get();
             delete foundUser.password;
-            console.log('LocalStrategy:', foundUser);
             return done(null, foundUser); //typically don't send the whole user back because it contains password and stuff
           }else{
             return done(null, false, {message: 'bad username or password'});
@@ -78,14 +78,12 @@ passport.use(new LocalStrategy({usernameField: 'name'}, function (name, password
 
 app.post('/api/login', passport.authenticate('local'), function(req, res){
   const user = req.user.data;
-  console.log('user:', user);
-  console.log('backend login response:', req.user);
-
   res.json(req.user);
 });
 
 app.get('/logout', (req, res) => {
   req.logout();
+  console.log('logged out');
   res.sendStatus(200);
 });
 
@@ -108,7 +106,9 @@ app.post('/api/register', (req, res) => {
 
 function isAuthenticated(req, res, next){
   if(req.isAuthenticated()) {next();}
-  else{res.redirect('/');
+  else{
+    console.log('WRONG')
+    res.redirect('/');
   }
 }
 

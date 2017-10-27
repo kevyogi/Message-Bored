@@ -32,6 +32,7 @@ angular.module('myApp')
     return $http.post(newUserUrl, user)
     .then(function(response){
       self.users.push(response.data);
+      $location.path('/login');
       return response.data;
     });
   }

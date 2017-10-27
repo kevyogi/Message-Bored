@@ -3,11 +3,17 @@ angular.module('myApp')
 
   this.topics = [];
 
-  this.addTopic = function(topic){
-    if(!topic){ return; }
+  this.addTopic = function(newTopic){
+    if(!newTopic){console.log('missing topic')}
 
     var topic = {
-      name: topic.name
-    }
+      name: newTopic.name
+    };
+
+    return $http.post('/api/topics', topic)
+    .then(function(response){
+      console.log('service response:', response);
+      return response.data;
+    });
   }
 }])

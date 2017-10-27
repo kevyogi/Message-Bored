@@ -20,6 +20,10 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/singleUser.html',
     controller: 'singleUserController'
   })
+  .when('/topics', {
+    templateUrl: '/views/newTopic.html',
+    controller: 'TopicsController'
+  })
 
   $locationProvider.html5Mode(true);
 }]);
