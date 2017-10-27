@@ -15,14 +15,17 @@ angular.module('myApp')
     .then(function(response){
       self.topics.push(response.data)
       console.log('service response:', response.data);
-      return response.data;
+      return response.data[(response.data.length-1)];
     });
   }
+
+
 
   $http.get('/api/topics')
   .then(function(topics){
     console.log(topics.data);
     self.topics = topics.data;
+    return topics.data;
   });
 
 }])

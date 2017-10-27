@@ -5,17 +5,31 @@ const Topics = db.topic;
 const Users = db.user;
 
 router.post('/', (req, res) => {
-  console.log('backend');
-  console.log('REQBODY:', req);
-  console.log('USER:', req.user);
   return Topics.create({
     name: req.body.name,
     author_id: req.user.id
   })
   .then((topic) => {
-    return res.json(topic);
+    return Topics.findOne({include:[{model: Users}],
+      where: {
+        name: topic.name
+      }
+    })
+    .then((topic) => {
+      return res.json(topic);
+    });
   });
 });
+
+// router.post('/', (req, res) => {
+//   return Topics.create({
+//     name: req.body.name,
+//     author_id: req.user.id
+//   })
+//   .then((topic) => {
+//     return res.json(topic);
+//   });
+// });
 
 router.get('/', (req, res) => {
   return Topics.findAll({include: [{model: Users}]}, {raw:true})
