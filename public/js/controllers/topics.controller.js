@@ -3,9 +3,20 @@ angular.module('myApp')
 
   $scope.TopicService = TopicService;
 
+  // $scope.getTopics = function(){
+  //   $scope.topics = TopicService.getTopic();
+  // }
+
   $scope.getTopics = function(){
-    $scope.topics = TopicService.getTopic();
+    return TopicService.getAllTopics()
+    .then(function(topics){
+      $scope.theTopics = topics;
+      console.log('topics:', topics);
+    });
   }
+
+  console.log($scope.getTopics());
+
 
   $scope.login = function(){
     return localStorage.getItem("login") === "true";

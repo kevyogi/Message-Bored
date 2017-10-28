@@ -20,13 +20,14 @@ angular.module('myApp')
   }
 
 
-
-  $http.get('/api/topics')
-  .then(function(topics){
-    //console.log(topics.data);
-    self.topics = topics.data;
-    return topics.data;
-  });
+  this.getAllTopics = function(){
+    return $http.get('/api/topics')
+    .then(function(topics){
+      //console.log(topics.data);
+      self.topics = topics.data;
+      return topics.data;
+    });
+  }
 
   this.getTopic = function(id){
     return $http.get(`/api/topics/${id}/messages`)
