@@ -5,7 +5,8 @@ const Topics = db.topic;
 const Users = db.user;
 const Messages = db.message;
 
-router.post('/', isAuthenticated,(req, res) => {
+router.post('/', (req, res) => {
+  console.log(req.body);
   return Topics.create({
     name: req.body.name,
     author_id: req.user.id
