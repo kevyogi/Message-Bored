@@ -40,12 +40,17 @@ passport.deserializeUser((user, done) => {
   console.log('deserializing');
   db.user.findOne({where: { id: user.id }})
   .then((user) => {
-    return done(null, {
-      id: user.id,
-      name: user.name
-    });
+    if(!user){
+      return done(null, {})
+    }else{
+      return done(null, {
+        id: user.id,
+        name: user.name
+      });
+    }
   });
 });
+
 
 passport.use(new LocalStrategy({usernameField: 'name'}, function (name, password, done) {
   db.user.findOne({where: {name: name}})

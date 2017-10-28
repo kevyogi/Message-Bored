@@ -45,6 +45,7 @@ angular.module('myApp')
 
     return $http.post('/api/login', user)
     .then(function(response){
+      localStorage.setItem('login', true);
       $location.path('/topics');
       return response.data;
     })
@@ -53,6 +54,7 @@ angular.module('myApp')
   this.logout = function(){
     return $http.get('/api/logout')
     .then(function(response){
+      localStorage.setItem('login', false);
       $location.path('/topics');
       console.log('logged out:', response);
       return response

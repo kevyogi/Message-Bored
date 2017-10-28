@@ -14,7 +14,7 @@ angular.module('myApp')
     return $http.post('/api/topics', topic)
     .then(function(response){
       self.topics.push(response.data)
-      console.log('service response:', response.data);
+      //console.log('service response:', response.data);
       return response.data;
     });
   }
@@ -23,7 +23,7 @@ angular.module('myApp')
 
   $http.get('/api/topics')
   .then(function(topics){
-    console.log(topics.data);
+    //console.log(topics.data);
     self.topics = topics.data;
     return topics.data;
   });
@@ -31,7 +31,7 @@ angular.module('myApp')
   this.getTopic = function(id){
     return $http.get(`/api/topics/${id}/messages`)
     .then(function(topicInfo){
-      console.log(topicInfo);
+      //console.log(topicInfo);
       return topicInfo;
     });
   }
@@ -43,7 +43,7 @@ angular.module('myApp')
     return $http.put(`/api/topics/${id}`, newTopic)
     .then(function(topic){
       $location.path(`/topics/${id}/messages`);
-      console.log(topic);
+      //console.log(topic);
       return topic;
     });
   }
