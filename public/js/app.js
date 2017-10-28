@@ -36,6 +36,10 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/editTopic.html',
     controller: 'EditTopicController'
   })
+  .when('/logout', {
+    templateUrl: '/views/logout.html',
+    controller: 'LogoutController'
+  })
 
   $locationProvider.html5Mode(true);
 }]);

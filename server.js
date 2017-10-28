@@ -82,8 +82,9 @@ app.post('/api/login', passport.authenticate('local'), function(req, res){
 });
 
 app.get('/api/logout', (req, res) => {
+  console.log(req.user);
   req.logout();
-  console.log('logged out');
+  console.log('logged out', req.user);
   res.sendStatus(200);
 });
 

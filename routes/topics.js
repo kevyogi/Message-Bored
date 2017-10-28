@@ -123,43 +123,6 @@ router.put('/:id', (req, res) => {
   });
 });
 
-// router.put('/:id', (req, res) => {
-//   const topicID = req.params.id;
-//   return Topics.findOne({
-//     where: {id: topicID}
-//   })
-//   .then((topic) => {
-//     if(topic.author_id === req.user.id){
-//       return Topics.update({
-//         name: req.body.name
-//       },{
-//         where: {
-//           id: topicID
-//         }
-//       })
-//       .then((updatedTopic) => {
-//         return Messages.findAll({
-//           where: {
-//             topic_id: updatedTopic.id
-//           }
-//         })
-//         .then((messages) => {
-//           let newData = {
-//             data: {
-//               messages: messages,
-//               topic: updatedTopic
-//             }
-//           }
-//           return res.json(newData);
-//         })
-//       })
-//       .catch((error)=>{
-//         console.log(error);
-//       });
-//     }
-//   });
-// });
-
 function isAuthenticated(req, res, next){
   if(req.isAuthenticated()) {next();}
   else{console.log('mistake');
