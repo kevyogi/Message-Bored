@@ -6,6 +6,7 @@
       <div>Message: {{ message.body }}</div>
       <div>Posted in: {{ message.topic.name }}</div>
       <div>By: {{ message.user.name }}</div>
+      <div>{{ message.createdAt | date:'medium' }}</div>
       </ul>
       <br>
     </li>

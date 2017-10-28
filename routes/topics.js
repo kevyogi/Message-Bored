@@ -5,7 +5,7 @@ const Topics = db.topic;
 const Users = db.user;
 const Messages = db.message;
 
-router.post('/', (req, res) => {
+router.post('/', isAuthenticated,(req, res) => {
   return Topics.create({
     name: req.body.name,
     author_id: req.user.id
@@ -49,7 +49,7 @@ router.get('/:id/messages', (req, res) => {
   });
 });
 
-router.post('/:id', (req, res) => {
+router.post('/:id', isAuthenticated, (req, res) => {
   const topicID = req.params.id;
   return Messages.create({
     body: req.body.body,
@@ -68,38 +68,8 @@ router.post('/:id', (req, res) => {
   });
 });
 
-// router.get('/:id', (req, res) => {
-//   console.log('backend:', req.params.id);
-//   return Topics.findOne({include: [{model: Users}, {model: Messages}],
-//     where: {
-//       id: req.params.id
-//     }
-//   })
-//   .then((data) => {
-//     console.log(data);
-//     res.json(data);
-//   });
-// });
-
-// router.get('/', (req, res) => {
-//   return Topics.findAll({include: [{model: Users}]}, {raw:true})
-//   .then((topics) => {
-//     if(topics){
-//       return Users.findAll({raw:true})
-//       .then((users) => {
-//         let data = {
-//           topics: topics,
-//           users: users
-//         }
-//         return res.json(data);
-//       });
-//     }
-//   });
-// });
-
-
 //THE GOOD ONE
-router.put('/:id', (req, res) => {
+router.put('/:id', isAuthenticated, (req, res) => {
   const topicID = req.params.id;
   return Topics.findOne({
     where: {id: topicID}

@@ -7,7 +7,9 @@
   <ul>
     <li ng-repeat="topic in TopicService.topics">
       <a ng-href="/topics/{{topic.id}}/messages">{{ topic.name }}</a>
-      <p>Posted by: {{ topic.user.name }}</p>
+      <div>Posted by: {{ topic.user.name }}</div>
+      <div>{{ topic.createdAt | date:'medium' }}</div>
+      <br>
     </li>
   </ul>
 </div>

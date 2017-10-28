@@ -6,6 +6,8 @@
     <li ng-repeat="message in topic.data.messages">
       <div>{{ message.body }}</div>
       <ul>Posted by: {{ message.user.name }}</ul>
+      <ul>{{ message.createdAt | date:'medium'}}</ul>
+      <br>
     </li>
   </ul>
 </div>

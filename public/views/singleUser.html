@@ -2,11 +2,12 @@
   <ul>
     <li>
       <h4>User: {{ user.user }}</h4>
-      <li>Join Date: {{ user.joinDate }}</li>
+      <li>Join Date: {{ user.joinDate | date:'medium'}}</li>
         Messages:
       <ul ng-repeat="message in user.messages">
         <li>
           <p>Message: {{ message.body }}</p>
+          <div>Posted: {{ message.createdAt | date:'medium' }}</div>
           <div>Topic: {{ message['topic.name'] }}</div>
         </li>
       </ul>
