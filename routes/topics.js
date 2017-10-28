@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id/messages', (req, res) => {
-  return Messages.findAll({include:[{model: Users}],
+  return Messages.findAll({order: [['createdAt', 'ASC']], include:[{model: Users}],
    where: {topic_id: req.params.id}}, {raw:true})
   .then((data) => {
     Topics.findOne({
@@ -58,6 +58,39 @@ router.get('/:id/messages', (req, res) => {
     });
   });
 });
+
+router.post('/:id', (req, res) => {
+  const topicID = req.params.id;
+  return Messages.create({
+    body: req.body.body,
+    author_id: req.user.id,
+    topic_id: topicID
+  })
+  .then((message) => {
+    return Messages.findOne({include:[{model:Users}],
+      where: {
+        id: message.id
+      }
+    })
+    .then((newMessage) => {
+      res.json(newMessage);
+    });
+  });
+});
+
+
+//KINDA GOOD ONE
+// router.post('/:id', (req, res) => {
+//   const topicID = req.params.id;
+//   return Messages.create({
+//     body: req.body.body,
+//     author_id: req.user.id,
+//     topic_id: topicID
+//   })
+//   .then((message) => {
+//     return res.json(message);
+//   });
+// });
 
 // router.get('/:id', (req, res) => {
 //   console.log('backend:', req.params.id);
@@ -113,18 +146,6 @@ router.get('/:id/messages', (req, res) => {
 //     }
 //   });
 // });
-
-router.post('/:id', (req, res) => {
-  const topicID = req.params.id;
-  return Messages.create({
-    body: req.body.body,
-    author_id: req.user.id,
-    topic_id: topicID
-  })
-  .then((message) => {
-    return res.json(message);
-  });
-});
 
 function isAuthenticated(req, res, next){
   if(req.isAuthenticated()) {next();}

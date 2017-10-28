@@ -17,7 +17,13 @@ angular.module('myApp')
   // });
 
   $scope.addMessage = function(e){
-    MessageService.addMessage($scope.newMessage, $routeParams.id);
+    MessageService.addMessage($scope.newMessage, $routeParams.id)
+    .then(function(newMessage){
+      console.log(newMessage);
+      $scope.topic.data.messages.push(newMessage);
+
+    })
+    $scope.newMessage.body = '';
   }
 
 }]);

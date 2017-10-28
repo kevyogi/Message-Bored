@@ -18,7 +18,7 @@ router.get('/latest', (req, res) => {
     {limit: 10, order: [['createdAt', 'DESC']],
     include: [{model: Topics}, {model: Users}]})
   .then((messages) => {
-    console.log(messages);
+    //console.log(messages);
     res.json(messages);
   });
 });

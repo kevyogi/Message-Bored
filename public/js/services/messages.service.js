@@ -27,4 +27,11 @@ angular.module('myApp')
     });
   }
 
+  this.allMessages = function(){
+    return $http.get('/api/messages')
+    .then(function(response){
+      return response.data
+    });
+  }
+
 }])
