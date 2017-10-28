@@ -42,7 +42,7 @@ angular.module('myApp')
 
     return $http.put(`/api/topics/${id}`, newTopic)
     .then(function(topic){
-      $location.path(`/topic/${id}/messages`);
+      $location.path(`/topics/${id}/messages`);
       console.log(topic);
       return topic;
     });
