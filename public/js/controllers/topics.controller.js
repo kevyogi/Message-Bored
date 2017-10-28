@@ -7,8 +7,9 @@ angular.module('myApp')
     $scope.topics = TopicService.getTopic();
   }
 
-  // $scope.getTopics();
-  // $scope.TopicService.getTopic();
+  $scope.login = function(){
+    return localStorage.getItem("login") === "true";
+  }
 
   $scope.addTopic = function(e){
     //console.log('newTopic:', $scope.newTopic);

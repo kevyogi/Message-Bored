@@ -31,7 +31,7 @@ angular.module('myApp')
   this.getTopic = function(id){
     return $http.get(`/api/topics/${id}/messages`)
     .then(function(topicInfo){
-      //console.log(topicInfo);
+      console.log(topicInfo);
       return topicInfo;
     });
   }

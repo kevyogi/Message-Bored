@@ -1,7 +1,7 @@
-<form>
+<form ng-if="login()">
   <input type="text" ng-model="newTopic.name" placeholder="Topic Name">
 </form>
-<button ng-click="addTopic()">Create New Topic</button>
+<button ng-click="addTopic()" ng-if="login()">Create New Topic</button>
 
 <div>Topics:
   <ul>

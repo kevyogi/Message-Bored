@@ -10,11 +10,9 @@ angular.module('myApp')
     $scope.topic = topicInfo;
   });
 
-  // TopicService.editTopic($routeParams.id)
-  // .then(function(topic){
-  //   console.log(topic);
-  //   $scope.topic = topic;
-  // });
+  $scope.login = function(){
+    return localStorage.getItem("login") === "true";
+  }
 
   $scope.addMessage = function(e){
     MessageService.addMessage($scope.newMessage, $routeParams.id)
