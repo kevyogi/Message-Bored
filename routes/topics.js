@@ -22,16 +22,6 @@ router.post('/', (req, res) => {
   });
 });
 
-// router.post('/', (req, res) => {
-//   return Topics.create({
-//     name: req.body.name,
-//     author_id: req.user.id
-//   })
-//   .then((topic) => {
-//     return res.json(topic);
-//   });
-// });
-
 router.get('/', (req, res) => {
   return Topics.findAll({include: [{model: Users}]}, {raw:true})
   .then((topics) => {
@@ -78,20 +68,6 @@ router.post('/:id', (req, res) => {
   });
 });
 
-
-//KINDA GOOD ONE
-// router.post('/:id', (req, res) => {
-//   const topicID = req.params.id;
-//   return Messages.create({
-//     body: req.body.body,
-//     author_id: req.user.id,
-//     topic_id: topicID
-//   })
-//   .then((message) => {
-//     return res.json(message);
-//   });
-// });
-
 // router.get('/:id', (req, res) => {
 //   console.log('backend:', req.params.id);
 //   return Topics.findOne({include: [{model: Users}, {model: Messages}],
@@ -123,29 +99,29 @@ router.post('/:id', (req, res) => {
 
 
 //THE GOOD ONE
-// router.put('/:id', (req, res) => {
-//   const topicID = req.params.id;
-//   return Topics.findOne({
-//     where: {id: topicID}
-//   })
-//   .then((topic) => {
-//     if(topic.author_id === req.user.id){
-//       return Topics.update({
-//         name: req.body.name
-//       },{
-//         where: {
-//           id: topicID
-//         }
-//       })
-//       .then((updatedTopic) => {
-//         return res.json(updatedTopic);
-//       })
-//       .catch((error)=>{
-//         console.log(error);
-//       });
-//     }
-//   });
-// });
+router.put('/:id', (req, res) => {
+  const topicID = req.params.id;
+  return Topics.findOne({
+    where: {id: topicID}
+  })
+  .then((topic) => {
+    if(topic.author_id === req.user.id){
+      return Topics.update({
+        name: req.body.name
+      },{
+        where: {
+          id: topicID
+        }
+      })
+      .then((updatedTopic) => {
+        return res.json(updatedTopic);
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
+    }
+  });
+});
 
 function isAuthenticated(req, res, next){
   if(req.isAuthenticated()) {next();}

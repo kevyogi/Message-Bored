@@ -1,5 +1,5 @@
 angular.module('myApp')
-.service('TopicService', ['$http', function($http){
+.service('TopicService', ['$http', '$location', function($http, $location){
   var self = this;
 
   this.topics = [];
@@ -36,12 +36,16 @@ angular.module('myApp')
     });
   }
 
-  // this.editTopic = function(id){
-  //   return $http.put(`/api/topics/${id}`)
-  //   .then(function(topic){
-  //     console.log(topic);
-  //     return topic;
-  //   });
-  // }
+  this.editTopic = function(newName, id){
+
+    var newTopic = newName;
+
+    return $http.put(`/api/topics/${id}`, newTopic)
+    .then(function(topic){
+      $location.path(`/topic/${id}/messages`);
+      console.log(topic);
+      return topic;
+    });
+  }
 
 }])

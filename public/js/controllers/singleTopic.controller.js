@@ -13,15 +13,13 @@ angular.module('myApp')
   // TopicService.editTopic($routeParams.id)
   // .then(function(topic){
   //   console.log(topic);
-  //   $scope.editedTopic = topic;
+  //   $scope.topic = topic;
   // });
 
   $scope.addMessage = function(e){
     MessageService.addMessage($scope.newMessage, $routeParams.id)
     .then(function(newMessage){
-      console.log(newMessage);
       $scope.topic.data.messages.push(newMessage);
-
     })
     $scope.newMessage.body = '';
   }

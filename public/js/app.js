@@ -32,6 +32,10 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/latestMessages.html',
     controller: 'MessagesController'
   })
+  .when('/topics/:id/edit', {
+    templateUrl: '/views/editTopic.html',
+    controller: 'EditTopicController'
+  })
 
   $locationProvider.html5Mode(true);
 }]);
