@@ -1,12 +1,11 @@
 <h3>{{ topic.data.topic.name }}</h3>
-<a href="/topics/{{topic.data.topic.id}}/edit" ng-if="login()">Edit</a>
-
+<a ng-href="/topics/{{topic.data.topic.id}}/edit" ng-if="validate()">Edit</a>
 <div>
   <ul>
     <li ng-repeat="message in topic.data.messages">
       <div>{{ message.body }}</div>
-      <ul>Posted by: {{ message.user.name }}</ul>
-      <ul>{{ message.createdAt | date:'medium'}}</ul>
+      <div>Posted by: <a ng-href="/users/{{message.user.id}}">{{ message.user.name }}</a></div>
+      <div>{{ message.createdAt | date:'medium'}}</div>
       <br>
     </li>
   </ul>
@@ -17,3 +16,5 @@
 </form>
 <br>
 <button ng-click="addMessage()" ng-if="login()">New Message</button>
+<br>
+<a ng-href="/topics">Back to Topics</a>

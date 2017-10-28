@@ -8,11 +8,18 @@ angular.module('myApp')
   .then(function(topicInfo){
     console.log('topicinfo:', topicInfo);
     $scope.topic = topicInfo;
+
+    $scope.validate = function(){
+      return Number(localStorage.getItem("user")) === topicInfo.data.topic.author_id;
+    }
+    console.log('validate', $scope.validate());
   });
 
   $scope.login = function(){
     return localStorage.getItem("login") === "true";
   }
+
+
 
   $scope.addMessage = function(e){
     MessageService.addMessage($scope.newMessage, $routeParams.id)

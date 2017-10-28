@@ -5,12 +5,15 @@
       <li>Join Date: {{ user.joinDate | date:'medium'}}</li>
         Messages:
       <ul ng-repeat="message in user.messages">
+        <br>
         <li>
-          <p>Message: {{ message.body }}</p>
+          <div>Message: {{ message.body }}</div>
           <div>Posted: {{ message.createdAt | date:'medium' }}</div>
-          <div>Topic: {{ message['topic.name'] }}</div>
+          <div>Topic: <a ng-href="/topics/{{message['topic.id']}}/messages">{{ message['topic.name'] }}</a></div>
+          <br>
         </li>
       </ul>
     </li>
   </ul>
+  <a ng-href="/users">Back to Users</a>
 </div>

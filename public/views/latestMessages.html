@@ -1,11 +1,11 @@
-<h3>Latest Messages</h3>
+<h3>Latest Messages:</h3>
 <div>
   <ul>
     <li ng-repeat="message in messages">
       <ul>
       <div>Message: {{ message.body }}</div>
-      <div>Posted in: {{ message.topic.name }}</div>
-      <div>By: {{ message.user.name }}</div>
+      <div>Posted in: <a ng-href="/topics/{{message.topic.id}}/messages">{{ message.topic.name }}</a></div>
+      <div>By: <a ng-href="/users/{{message.user.id}}">{{ message.user.name }}</a></div>
       <div>{{ message.createdAt | date:'medium' }}</div>
       </ul>
       <br>
