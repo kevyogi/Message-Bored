@@ -6,7 +6,7 @@ angular.module('myApp')
 
   TopicService.getTopic($routeParams.id)
   .then(function(topicInfo){
-    console.log('topicinfo:', topicInfo);
+    //console.log('topicinfo:', topicInfo);
     $scope.topic = topicInfo;
 
     $scope.validate = function(){

@@ -40,6 +40,10 @@ var myApp = angular.module('myApp')
     templateUrl: '/views/logout.html',
     controller: 'LogoutController'
   })
+  .when('/messages/:id/edit', {
+    templateUrl: '/views/editMessage.html',
+    controller: 'EditMessageController'
+  })
 
   $locationProvider.html5Mode(true);
 }]);

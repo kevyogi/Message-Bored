@@ -7,11 +7,11 @@ angular.module('myApp')
     return TopicService.getAllTopics()
     .then(function(topics){
       $scope.theTopics = topics;
-      console.log('topics:', topics);
+      //console.log('topics:', topics);
     });
   }
 
-  console.log($scope.getTopics());
+  $scope.getTopics();
 
 
   $scope.login = function(){
@@ -19,7 +19,7 @@ angular.module('myApp')
   }
 
   $scope.addTopic = function(e){
-    console.log('newTopic:', $scope.newTopic);
+    //console.log('newTopic:', $scope.newTopic);
     TopicService.addTopic($scope.newTopic);
     $scope.newTopic.name = '';
   }

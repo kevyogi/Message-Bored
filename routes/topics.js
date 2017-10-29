@@ -5,7 +5,7 @@ const Topics = db.topic;
 const Users = db.user;
 const Messages = db.message;
 
-router.post('/', (req, res) => {
+router.post('/', isAuthenticated, (req, res) => {
   console.log(req.body);
   return Topics.create({
     name: req.body.name,
@@ -20,6 +20,9 @@ router.post('/', (req, res) => {
     .then((topic) => {
       return res.json(topic);
     });
+  })
+  .catch((error) => {
+    console.log(error);
   });
 });
 
@@ -27,6 +30,9 @@ router.get('/', (req, res) => {
   return Topics.findAll({include: [{model: Users}]}, {raw:true})
   .then((topics) => {
     return res.json(topics);
+  })
+  .catch((error) => {
+    console.log(error);
   });
 });
 
@@ -47,6 +53,9 @@ router.get('/:id/messages', (req, res) => {
       console.log(topicData);
       return res.json(topicData);
     });
+  })
+  .catch((error) => {
+    console.log(error);
   });
 });
 
@@ -66,6 +75,9 @@ router.post('/:id', isAuthenticated, (req, res) => {
     .then((newMessage) => {
       res.json(newMessage);
     });
+  })
+  .catch((error) => {
+    console.log(error);
   });
 });
 

@@ -1,11 +1,12 @@
 <h3>{{ topic.data.topic.name }}</h3>
-<a ng-href="/topics/{{topic.data.topic.id}}/edit" ng-if="validate()">Edit</a>
+<a ng-href="/topics/{{topic.data.topic.id}}/edit" ng-if="validate()">Edit Topic</a>
 <div>
   <ul>
     <li ng-repeat="message in topic.data.messages">
       <div>{{ message.body }}</div>
       <div>Posted by: <a ng-href="/users/{{message.user.id}}">{{ message.user.name }}</a></div>
       <div>{{ message.createdAt | date:'medium'}}</div>
+      <div><a ng-href="/messages/{{message.id}}/edit">Edit Message</a></div>
       <br>
     </li>
   </ul>
