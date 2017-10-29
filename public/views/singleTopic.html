@@ -1,4 +1,4 @@
-<h3>{{ topic.data.topic.name }}</h3>
+<!-- <h3>{{ topic.data.topic.name }}</h3>
 <a ng-href="/topics/{{topic.data.topic.id}}/edit" ng-if="validate()">Edit Topic</a>
 <div>
   <ul>
@@ -7,6 +7,32 @@
       <div>Posted by: <a ng-href="/users/{{message.user.id}}">{{ message.user.name }}</a></div>
       <div>{{ message.createdAt | date:'medium'}}</div>
       <div><a ng-href="/messages/{{message.id}}/edit">Edit Message</a></div>
+      <br>
+    </li>
+  </ul>
+</div>
+
+<form ng-hide="!login()">
+  <textarea cols="30" rows="10" ng-model="newMessage.body"></textarea>
+</form>
+<br>
+<button ng-click="addMessage()" ng-if="login()">New Message</button>
+<br>
+<a ng-href="/topics">Back to Topics</a> -->
+
+<h3>{{ topic.data.topic.name }}</h3>
+<a ng-href="/topics/{{topic.data.topic.id}}/edit" ng-if="validateTopic()">Edit Topic</a>
+<div>
+  <ul>
+    <li ng-repeat="message in topic.data.messages">
+      <div ng-model="message.body">{{ message.body }}</div>
+      <div>Posted by: <a ng-href="/users/{{message.user.id}}">{{ message.user.name }}</a></div>
+      <div>{{ message.createdAt | date:'medium'}}</div>
+      <div>
+        <button ng-click="edit = !edit" ng-show="message.author_id === user">Edit</button><br>
+        <textarea ng-model="message.body" ng-show="edit" cols="30" rows="10"></textarea><br>
+        <button ng-click="editMessage(message.body, message.id);edit = !edit" ng-show="edit">Save Changes</button>
+      </div>
       <br>
     </li>
   </ul>

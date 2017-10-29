@@ -106,6 +106,37 @@ router.put('/:id', isAuthenticated, (req, res) => {
   });
 });
 
+router.put('/:id/messages', (req, res) => {
+  const messageID = req.body.id;
+  console.log(messageID);
+  return Messages.findOne({include:[{model: Users}, {model: Topics}],
+    where: {
+      id: messageID
+    }
+  })
+  .then((oldMessage) => {
+    if(oldMessage.author_id === req.user.id){
+      return Messages.update({
+        body: req.body.body
+      },{
+        where: {
+          id: messageID
+        }
+      })
+      .then((editedMessage) => {
+        let messageInfo = {
+          old: oldMessage,
+          new: editedMessage
+        }
+        return res.json(messageInfo);
+      });
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+});
+
 function isAuthenticated(req, res, next){
   if(req.isAuthenticated()) {next();}
   else{console.log('mistake');

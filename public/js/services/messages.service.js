@@ -42,15 +42,29 @@ angular.module('myApp')
     });
   }
 
+  // this.editMessage = function(message, messageID){
+
+  //   var message = {
+  //     body: message.body
+  //   };
+
+  //   return $http.put(`/api/messages/${messageID}/edit`, message)
+  //   .then(function(response){
+  //     //$location.path(`/topics/${topicID}/messages`)
+  //     return response.data;
+  //   });
+  // }
+
   this.editMessage = function(message, messageID, topicID){
 
     var message = {
-      body: message.body
+      body: message,
+      id: messageID
     };
 
-    return $http.put(`/api/messages/${messageID}/edit`, message)
+    return $http.put(`/api/topics/${topicID}/messages`, message)
     .then(function(response){
-      $location.path(`/topics/${topicID}/messages`)
+      //$location.path(`/topics/${topicID}/messages`)
       return response.data;
     });
   }
